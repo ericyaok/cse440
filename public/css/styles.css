@@ -4,3 +4,45 @@
 *:after {
   box-sizing: border-box;
 }
+
+/******* Link Styles & List***************/
+ul, a {
+  text-decoration: none;
+  list-style: none;
+}
+
+/******* Header Styles ***************/
+header{
+  display: flex;
+  padding: 1rem 0;
+  justify-content: space-between;
+}
+
+header .siteName a{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/******* Navigation Styles ***************/
+nav {
+  background-color: #333; 
+}
+
+nav ul {
+  margin: 0;
+  padding: 0 10px;
+  display: flex; 
+  justify-content: space-between; 
+  list-style-type: none; 
+}
+
+nav ul li {
+  color: white; 
+  cursor: pointer; 
+  padding: 10px 0;
+}
+
+nav ul li:hover {
+  background-color: #575757; 
+  border-radius: 5px; 
+}
