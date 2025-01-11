@@ -5,6 +5,7 @@
   box-sizing: border-box;
 }
 
+
 /******* Link Styles & List***************/
 ul, a {
   text-decoration: none;
@@ -45,4 +46,80 @@ nav ul li {
 nav ul li:hover {
   background-color: #575757; 
   border-radius: 5px; 
+}
+
+/******* Hero Section ***************/
+#hero-image {
+  width: 100%;
+  height: auto;
+  max-width: 800px;
+}
+
+#hero-wrapper ul{
+  position: relative;
+  top:150px;
+  left: -30px;
+  color:  blue;
+  width: 250px;
+  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+#own-today {
+  width: 150px;
+}
+
+/******* Hero Bottom ***************/
+
+#upgrades_wrapper{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  justify-content: center;
+}
+
+#upgrades_wrapper * {
+  margin: 0;
+  padding: 0;
+}
+
+#upgrades_wrapper figure{
+  width: 120px;
+  border: 1px solid black;
+  text-align: center;
+  background-color: #8fd9fb;
+  margin: 10px;
+}
+
+#upgrades_wrapper figure figcaption{
+background-color: white;
+}
+
+/******* Styles for tablet & above ***************/
+
+@media (min-width: 768px) {
+ #hero_bottom {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 50px;
+ }
+
+ body {
+  background-image: url(/images/site/small_check.jpg);
+}
+
+#wrapper {
+  width: 90%;
+  border: 5px solid #8fd9fb;
+  margin: 50px auto;
+  border-radius: 5px;
+  padding: 1rem;
+  background: white;
+}
+
+section {
+  margin: 100px 0;
+}
+
 }
