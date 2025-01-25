@@ -60,6 +60,32 @@ Util.buildClassificationGrid = async function (data) {
 }
 
 
+/* **************************************
+* Build the detail view HTML
+* ************************************ */
+Util.buildDetailView = async function (data) {
+    let card
+    if (data) {
+        card += '<div>'
+        card += '<p>' + 'Make ' + data.inv_make + '</p>'
+        card += '<p>' + 'Model ' + data.inv_model + '</p>'
+        card += '<p>' + 'Year ' + data.inv_year + '</p>'
+        card += '<p>' + 'Price ' + data.inv_price + '</p>'
+        card += '<p>' + 'Color ' + data.inv_color + '</p>'
+        card += '<p>' + 'Mileage ' + data.inv_miles + '</p>'
+        card += '<p>' + 'Description ' + data.inv_description + '</p>'
+        card += '<img src="' + data.inv_image + '" alt="Vehicle Image" />';
+        card += '</div>'
+
+    } else {
+        card += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+    }
+    return card
+}
+
+
+
+
 
 
 /* ****************************************
