@@ -25,28 +25,22 @@ async function getInventoryByClassificationId(classification_id) {
     }
 }
 
-
+/* ***************************
+ *  Get a single inventory item by id
+ * ************************** */
 async function getInventoryByVehicleId(vehicle_id) {
     try {
         const data = await pool.query(
             `SELECT * 
              FROM public.inventory 
              WHERE inv_id = $1`,
-            [vehicle_id] // Pass the vehicle_id as the parameter
+            [vehicle_id]
         );
-        return data.rows[0]; // Return the vehicle with the specified ID
+        return data.rows[0];
     } catch (error) {
         console.error("getVehicleById error: " + error);
     }
 }
-
-
-
-
-
-
-
-
 
 
 

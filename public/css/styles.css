@@ -7,45 +7,49 @@
 
 
 /******* Link Styles & List***************/
-ul, a {
+ul,
+a {
   text-decoration: none;
   list-style: none;
 }
 
 /******* Header Styles ***************/
-header{
+header {
   display: flex;
   padding: 1rem 0;
   justify-content: space-between;
 }
 
-header .siteName a{
+header .siteName a {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 /******* Navigation Styles ***************/
 nav {
-  background-color: #333; 
+  background-color: #333;
 }
 
 nav ul {
   margin: 0;
   padding: 0 10px;
-  display: flex; 
-  justify-content: space-between; 
-  list-style-type: none; 
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
 }
 
 nav ul li {
-  color: white; 
-  cursor: pointer; 
+  cursor: pointer;
   padding: 10px 0;
 }
 
+nav ul li a {
+  color: white;
+}
+
 nav ul li:hover {
-  background-color: #575757; 
-  border-radius: 5px; 
+  background-color: #575757;
+  border-radius: 5px;
 }
 
 /******* Hero Section ***************/
@@ -55,11 +59,11 @@ nav ul li:hover {
   max-width: 800px;
 }
 
-#hero-wrapper ul{
+#hero-wrapper ul {
   position: relative;
-  top:150px;
+  top: 150px;
   left: -30px;
-  color:  blue;
+  color: blue;
   width: 250px;
   background-color: transparent;
   background-color: rgba(255, 255, 255, 0.7);
@@ -71,7 +75,7 @@ nav ul li:hover {
 
 /******* Hero Bottom ***************/
 
-#upgrades_wrapper{
+#upgrades_wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
@@ -83,7 +87,7 @@ nav ul li:hover {
   padding: 0;
 }
 
-#upgrades_wrapper figure{
+#upgrades_wrapper figure {
   width: 120px;
   border: 1px solid black;
   text-align: center;
@@ -91,35 +95,53 @@ nav ul li:hover {
   margin: 10px;
 }
 
-#upgrades_wrapper figure figcaption{
-background-color: white;
+#upgrades_wrapper figure figcaption {
+  background-color: white;
 }
+
+/******* Vehucle detail section ***************/
+
+.detail-specs {
+  padding: 10px;
+  max-width: 400px;
+}
+
+.detail-card img {
+  width: 100%;
+  max-width: 600px;
+  display: block;
+}
+
 
 /******* Styles for tablet & above ***************/
 
 @media (min-width: 768px) {
- #hero_bottom {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
-  gap: 50px;
- }
+  #hero_bottom {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 50px;
+  }
 
- body {
-  background-image: url(/images/site/small_check.jpg);
-}
+  body {
+    background-image: url(/images/site/small_check.jpg);
+  }
 
-#wrapper {
-  width: 90%;
-  border: 5px solid #8fd9fb;
-  margin: 50px auto;
-  border-radius: 5px;
-  padding: 1rem;
-  background: white;
-}
+  #wrapper {
+    width: 90%;
+    border: 5px solid #8fd9fb;
+    margin: 50px auto;
+    border-radius: 5px;
+    padding: 1rem;
+    background: white;
+  }
 
-section {
-  margin: 100px 0;
-}
+  section {
+    margin: 100px 0;
+  }
+
+  .detail-card {
+    display: flex;
+  }
 
 }

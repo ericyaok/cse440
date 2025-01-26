@@ -61,20 +61,39 @@ Util.buildClassificationGrid = async function (data) {
 
 
 /* **************************************
+* Format numbers
+* ************************************ */
+Util.formatToUSD = function (number) {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    }).format(number);
+}
+
+
+Util.formatMileage = function (mileage) {
+    return new Intl.NumberFormat('en-US').format(mileage);
+}
+
+
+
+/* **************************************
 * Build the detail view HTML
 * ************************************ */
 Util.buildDetailView = async function (data) {
     let card
     if (data) {
-        card += '<div>'
-        card += '<p>' + 'Make ' + data.inv_make + '</p>'
-        card += '<p>' + 'Model ' + data.inv_model + '</p>'
-        card += '<p>' + 'Year ' + data.inv_year + '</p>'
-        card += '<p>' + 'Price ' + data.inv_price + '</p>'
-        card += '<p>' + 'Color ' + data.inv_color + '</p>'
-        card += '<p>' + 'Mileage ' + data.inv_miles + '</p>'
-        card += '<p>' + 'Description ' + data.inv_description + '</p>'
+        card += '<div class="detail-card">'
         card += '<img src="' + data.inv_image + '" alt="Vehicle Image" />';
+        card += '<div class="detail-specs">'
+        card += '<h2>' + data.inv_make + " " + data.inv_model + ' Details' + '</h2>'
+        card += '<p><b>' + 'Price ' + Util.formatToUSD(data.inv_price) + '</b></p>'
+        card += '<p>' + '<b>Description </b>' + data.inv_description + '</p>'
+        card += '<p>' + '<b>Color </b>' + data.inv_color + '</p>'
+        card += '<p>' + '<b>Mileage </b>' + Util.formatMileage(data.inv_miles) + '</p>'
+        card += '</div>'
         card += '</div>'
 
     } else {
@@ -82,10 +101,6 @@ Util.buildDetailView = async function (data) {
     }
     return card
 }
-
-
-
-
 
 
 /* ****************************************
