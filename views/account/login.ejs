@@ -1,0 +1,30 @@
+<!-- Page Heading -->
+<% if (title) { %>
+  <h1>
+    <%= title %>
+  </h1>
+  <% } else { res.redirect('/') } %>
+
+
+    <!-- Page Message block -->
+    <%- messages() %>
+
+
+      <!-- Login Form -->
+      <div class="login-container">
+        <form id="login-form">
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="account_email" placeholder="Enter your email" required>
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <small>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1
+              special character</small>
+            <input type="password" id="password" name="account_password" placeholder="Enter your password" required
+              pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+          </div>
+          <button type="submit" class="login-button">Login</button>
+        </form>
+        <p class="signup-text">No account? <a href="/account/register">Sign up</a></p>
+      </div>
