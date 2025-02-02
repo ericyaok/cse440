@@ -1,0 +1,15 @@
+<!-- Page Heading -->
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+
+<!-- Page Message block -->
+<%- messages() %>
+
+
+<!-- Inventory Items Display -->
+<p><a href="/inv/add-classification">Add New Classification</a></p>
+<p><a href="inv/add-vehicle">Add New Inventory</a></p>
