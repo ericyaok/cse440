@@ -119,9 +119,6 @@ invCont.addClassification = async function (req, res, next) {
 
   let nav = await utilities.getNav()
   const classification_name = req.body.classification_name
-  console.log('why why')
-  console.log(classification_name)
-  console.log(req.body)
 
   const addResult = await invModel.createClassification(
     classification_name
@@ -151,7 +148,7 @@ invCont.addInventory = async function (req, res) {
   let nav = await utilities.getNav()
   const { classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color } = req.body
   const classificationSelect = await utilities.buildClassificationList()
-  
+
   const addInventory = await invModel.createInventory(
     classification_id,
     inv_make, inv_model,
