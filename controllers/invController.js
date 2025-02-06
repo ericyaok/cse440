@@ -144,7 +144,7 @@ invCont.addClassification = async function (req, res, next) {
 }
 
 // Process Add Inventory
-invCont.addInventory = async function (req, res, next) {
+invCont.addInventory = async function (req, res) {
 
   let nav = await utilities.getNav()
   const { classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color } = req.body
