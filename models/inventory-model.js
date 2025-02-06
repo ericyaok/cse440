@@ -55,7 +55,39 @@ async function createClassification(classification_name){
   }
 
 
+/* ***************************
+ *  Add A New Inventory
+ * ************************** */
+  async function createInventory(classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color) {
+    try {
+      const sql = `
+        INSERT INTO inventory 
+        (classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color) 
+        VALUES 
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) 
+        RETURNING *`;
+      
+      const result = await pool.query(sql, [
+        classification_id, 
+        inv_make, 
+        inv_model, 
+        inv_year, 
+        inv_description, 
+        inv_image, 
+        inv_thumbnail, 
+        inv_price, 
+        inv_miles, 
+        inv_color
+      ]);
+  
+      return result.rows[0]; // Return the newly created inventory entry
+    } catch (error) {
+      console.error(error); // Log the error
+      return { error: "There was an issue adding the inventory. Please try again." }; // Return a user-friendly error message
+    }
+  }
+  
 
 
 
-module.exports = { getClassifications, getInventoryByClassificationId, getInventoryByVehicleId, createClassification };
+module.exports = { getClassifications, getInventoryByClassificationId, getInventoryByVehicleId, createClassification, createInventory };
