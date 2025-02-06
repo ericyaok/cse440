@@ -8,6 +8,13 @@
 
         <!-- Page Message block -->
         <%- messages() %>
+        <% if (errors) { %>
+            <ul class="notice">
+           <% errors.array().forEach(error => { %>
+             <li><%= error.msg %></li>
+          <%  }) %>
+           </ul>
+          <% } %>
 
 
             <!-- Add Classification Form -->

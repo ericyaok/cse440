@@ -1,71 +1,73 @@
 <!-- Page Heading -->
 <% if (title) { %>
-    <h1>
-        <%= title %>
-    </h1>
-    <% } else { res.redirect('/') } %>
+    <h1><%= title %></h1>
+<% } else { %>
+    <% res.redirect('/') %>
+<% } %>
 
+<!-- Page Message block -->
+<%- messages() %>
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
 
-        <!-- Page Message block -->
-        <%- messages() %>
+<!-- Add Inventory Form -->
+<div class="add-inventory-container">
+    <form action="/inv/add-inventory" method="post">
+        <div class="form-group">
+            <label for="inv_make">Category:</label>
+            <%- classificationSelect %>
+        </div>
 
+        <div class="form-group">
+            <label for="inv_make">Make:</label>
+            <input type="text" id="inv_make" name="inv_make" required value="<%= locals.inv_make %>">
+        </div>
 
-            <!-- Add Inventory Form -->
-            <div class="add-inventory-container">
-                <form action="/inv/add-inventory" method="post">
-                    <div class="form-group">
-                        <label for="inv_make">Category:</label>
-                        <%- classificationList %>
-                    </div>
-                    <div class="form-group">
-                        <label for="inv_make">Make:</label>
-                        <input type="text" id="inv_make" name="inv_make" required value="<%= locals.inv_make %>">
-                    </div>
+        <div class="form-group">
+            <label for="inv_model">Model:</label>
+            <input type="text" id="inv_model" name="inv_model" required value="<%= locals.inv_model %>">
+        </div>
 
-                    <div class="form-group">
-                        <label for="inv_model">Model:</label>
-                        <input type="text" id="inv_model" name="inv_model" required value="<%= locals.inv_model %>">
-                    </div>
+        <div class="form-group">
+            <label for="inv_year">Year:</label>
+            <input type="number" id="inv_year" name="inv_year" min="1900" max="2099" required value="<%= locals.inv_year %>">
+        </div>
 
-                    <div class="form-group">
-                        <label for="inv_year">Year:</label>
-                        <input type="number" id="inv_year" name="inv_year" min="1900" max="2099" required
-                            value="<%= locals.inv_year %>">
-                    </div>
+        <div class="form-group">
+            <label for="inv_description">Description:</label>
+            <input type="text" id="inv_description" name="inv_description" required value="<%= locals.inv_description %>">
+        </div>
 
-                    <div class="form-group">
-                        <label for="inv_description">Description:</label>
-                        <input type="text" id="inv_description" name="inv_description" required
-                            value="<%= locals.inv_description %>">
-                    </div>
+        <div class="form-group">
+            <label for="inv_image">Image Path:</label>
+            <input type="text" id="inv_image" name="inv_image" required value="<%= locals.inv_image %>">
+        </div>
 
-                    <div class="form-group">
-                        <label for="inv_image">Image Path:</label>
-                        <input type="text" id="inv_image" name="inv_image" required value="<%= locals.inv_image %>">
-                    </div>
+        <div class="form-group">
+            <label for="inv_thumbnail">Thumbnail Path:</label>
+            <input type="text" id="inv_thumbnail" name="inv_thumbnail" required value="<%= locals.inv_thumbnail %>">
+        </div>
 
-                    <div class="form-group">
-                        <label for="inv_thumbnail">Thumbnail Path:</label>
-                        <input type="text" id="inv_thumbnail" name="inv_thumbnail" required
-                            value="<%= locals.inv_thumbnail %>">
-                    </div>
+        <div class="form-group">
+            <label for="inv_price">Price ($):</label>
+            <input type="number" id="inv_price" name="inv_price" step="0.01" required value="<%= locals.inv_price %>">
+        </div>
 
-                    <div class="form-group">
-                        <label for="inv_price">Price ($):</label>
-                        <input type="number" id="inv_price" name="inv_price" step="0.01" required
-                            value="<%= locals.inv_price %>">
-                    </div>
+        <div class="form-group">
+            <label for="inv_miles">Miles:</label>
+            <input type="number" id="inv_miles" name="inv_miles" required value="<%= locals.inv_miles %>">
+        </div>
 
-                    <div class="form-group">
-                        <label for="inv_miles">Miles:</label>
-                        <input type="number" id="inv_miles" name="inv_miles" required value="<%= locals.inv_miles %>">
-                    </div>
+        <div class="form-group">
+            <label for="inv_color">Color:</label>
+            <input type="text" id="inv_color" name="inv_color" required value="<%= locals.inv_color %>">
+        </div>
 
-                    <div class="form-group">
-                        <label for="inv_color">Color:</label>
-                        <input type="text" id="inv_color" name="inv_color" required value="<%= locals.inv_color %>">
-                    </div>
-
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
