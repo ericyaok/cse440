@@ -29,7 +29,7 @@ validate.checkClassificationData = async (req, res, next) => {
     errors = validationResult(req)
     if (!errors.isEmpty()) {
         let nav = await utilities.getNav();
-        return res.render("inv/add-classification", {
+        return res.render("inventory/add-classification", {
             errors,
             title: "Add New Classification",
             nav,

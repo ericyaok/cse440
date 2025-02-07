@@ -24,7 +24,8 @@
                         <form action="/inv/add-classification" method="post">
                             <label for="textInput">Add New Classification:</label>
                             <input type="text" id="textInput" name="classification_name" pattern="[A-Za-z0-9]+"
-                                placeholder="Name cannot contain a space or special character of any kind." required>
+                                placeholder="Name cannot contain a space or special character of any kind." required
+                                value="<%= locals.classification_name %>">
                             <button type="submit">Submit</button>
                         </form>
                     </div>
