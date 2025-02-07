@@ -8,21 +8,23 @@
 
         <!-- Page Message block -->
         <%- messages() %>
-            <!-- <% if (errors) { %>
-            <ul class="notice">
-           <% errors.array().forEach(error => { %>
-             <li><%= error.msg %></li>
-          <%  }) %>
-           </ul>
-          <% } %>
- -->
+            <% if (errors) { %>
+                <ul class="notice">
+                    <% errors.array().forEach(error=> { %>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } %>
 
-            <!-- Add Classification Form -->
-            <div class="add-classification-container">
-                <form action="/inv/add-classification" method="post">
-                    <label for="textInput">Add New Classification:</label>
-                    <input type="text" id="textInput" name="classification_name" pattern="[A-Za-z0-9]+"
-                        placeholder="Name cannot contain a space or special character of any kind." required>
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
+
+                    <!-- Add Classification Form -->
+                    <div class="add-classification-container">
+                        <form action="/inv/add-classification" method="post">
+                            <label for="textInput">Add New Classification:</label>
+                            <input type="text" id="textInput" name="classification_name" pattern="[A-Za-z0-9]+"
+                                placeholder="Name cannot contain a space or special character of any kind." required>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>

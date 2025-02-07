@@ -10,6 +10,12 @@ const validate = {}
  * ********************************* */
 validate.inventoryRules = () => {
     return [
+
+        // Classification ID is required
+        body('classification_id')
+            .notEmpty()
+            .withMessage('Please select a classification.'),
+
         // Make is required and must be a string
         body("inv_make")
             .trim()
@@ -42,14 +48,12 @@ validate.inventoryRules = () => {
         body("inv_image")
             .trim()
             .notEmpty()
-            .isURL()
             .withMessage("Image path must be a valid URL."),
 
         // Thumbnail path is required and must be a valid URL
         body("inv_thumbnail")
             .trim()
             .notEmpty()
-            .isURL()
             .withMessage("Thumbnail path must be a valid URL."),
 
         // Price is required and must be a positive number
@@ -80,7 +84,8 @@ validate.inventoryRules = () => {
  * Check data and return errors or continue to inventory addition
  * ***************************** */
 validate.checkInventoryData = async (req, res, next) => {
-    const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color } = req.body;
+    const { classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color } = req.body;
+    const classificationSelect = utilities.buildClassificationList()
     let errors = [];
     errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -89,6 +94,8 @@ validate.checkInventoryData = async (req, res, next) => {
             errors,
             title: "Add New Vehicle",
             nav,
+            classificationSelect,
+            classification_id,
             inv_make,
             inv_model,
             inv_year,
