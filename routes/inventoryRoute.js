@@ -24,6 +24,12 @@ router.get("/detail/:vehicleId", invController.buildByVehicleId);
 // Route to build error
 router.get("/error/:vehicleId", invController.buildError);
 
+// Route to get inventory in management view
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+// Edit inventory route
+router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditView));
+
 // Process classification addition
 router.post(
   "/add-classification",
@@ -40,6 +46,12 @@ router.post(
   utilities.handleErrors(invController.addInventory)
 )
 
+// Process inventory editing/update
+router.post("/update/",
+  inventoryValidate.inventoryRules(),
+  inventoryValidate.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory)
+)
 
 
 
