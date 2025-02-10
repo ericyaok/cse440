@@ -45,7 +45,7 @@ async function buildAccountEdit(req, res, next) {
     account_firstname: itemData.account_firstname,
     account_lastname: itemData.account_lastname,
     account_email: itemData.account_email,
-    account_password: itemData.account_password,
+    account_id: account_id,
   })
 }
 
