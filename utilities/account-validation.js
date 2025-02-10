@@ -38,11 +38,12 @@ validate.registationRules = () => {
                 const existingAccount = await accountModel.getAccountByEmail(account_email);
 
                 console.log('existing email', existingAccount)
+                console.log(!(existingAccount.account_id != accountId))
 
                 if (existingAccount) {
                     // Check if the existing email belongs to a different user
-                    if (existingAccount.account_id != accountId) {
-                        throw new Error("Email exists. Please log in or use a different email.");
+                    if (!(existingAccount.account_id != accountId)) {
+                        throw new Error("This email exists already. Choose a different one.");
                     }
                 }
             }),
