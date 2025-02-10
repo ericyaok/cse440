@@ -1,0 +1,73 @@
+<!-- Page Heading -->
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/') } %>
+
+
+        <!-- Page Message block -->
+        <%- messages() %>
+            <% if (errors) { %>
+                <ul class="notice">
+                    <% errors.array().forEach(error=> { %>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } %>
+
+                    <!-- Register Form -->
+                    <div class="registration-container">
+                        <form id="registration-form" action="/account/edit-info" method="post">
+                            <!-- First Name -->
+                            <div class="input-group">
+                                <label for="first-name">First Name</label>
+                                <input type="text" id="first-name" name="account_firstname"
+                                    placeholder="Enter your first name" required
+                                    value="<%= locals.account_firstname %>">>
+                            </div>
+
+                            <!-- Last Name -->
+                            <div class="input-group">
+                                <label for="last-name">Last Name</label>
+                                <input type="text" id="last-name" name="account_lastname"
+                                    placeholder="Enter your last name" required value="<%= locals.account_lastname %>">>
+                            </div>
+
+                            <!-- Email Address -->
+                            <div class="input-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="account_email" placeholder="Enter your email"
+                                    required value="<%= locals.account_email %>">>
+                            </div>
+                            <input type="hidden" name="account_id" <% if(locals.account_id) { %> value="<%=
+                                locals.account_id %>"
+                                <% } %>>
+
+                                    <!-- Submit Button -->
+                                    <button type="submit" class="register-button">Update</button>
+                        </form>
+                        <form action="/account/update-password" method="POST">
+                            <!-- Password -->
+                            <div class="input-group">
+                                <h2>Update Password</h2>
+                                <label for="password">Password</label>
+                                <small>Passwords must be at least 12 characters and contain at least 1 number, 1 capital
+                                    letter, and 1 special character.</small>
+                                <input type="password" id="password" name="account_password"
+                                    placeholder="Enter your password" required
+                                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+                            </div>
+                            <input type="hidden" name="account_id" <% if(locals.account_id) { %> value="<%=
+                                locals.account_id %>"
+                                <% } %>>
+
+                                    <!-- Submit Button -->
+                                    <div class="input-group">
+                                        <button type="submit">Show Password</button>
+                                        <button type="submit">Change Password</button>
+                                    </div>
+                        </form>
+                    </div>

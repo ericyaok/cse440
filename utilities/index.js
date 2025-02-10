@@ -139,35 +139,70 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
     if (req.cookies.jwt) {
-     jwt.verify(
-      req.cookies.jwt,
-      process.env.ACCESS_TOKEN_SECRET,
-      function (err, accountData) {
-       if (err) {
-        req.flash("Please log in")
-        res.clearCookie("jwt")
-        return res.redirect("/account/login")
-       }
-       res.locals.accountData = accountData
-       res.locals.loggedin = 1
-       next()
-      })
+        jwt.verify(
+            req.cookies.jwt,
+            process.env.ACCESS_TOKEN_SECRET,
+            function (err, accountData) {
+                if (err) {
+                    req.flash("Please log in")
+                    res.clearCookie("jwt")
+                    return res.redirect("/account/login")
+                }
+                res.locals.accountData = accountData
+                res.locals.loggedin = 1
+                next()
+            })
     } else {
-     next()
+        res.locals.loggedin = false;
+        next()
     }
-   }
+}
+
+
+
+/* ****************************************
+* Middleware to authorize admin roles
+**************************************** */
+Util.giveAdminRights = (req, res, next) => {
+    const token = req.cookies.jwt; // Assumes JWT is stored in cookies
+
+    if (!token) {
+        req.flash("notice", "Please log in to access this page.");
+        return res.redirect("/account/login");
+    }
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, accountData) => {
+        if (err) {
+            req.flash("notice", "Invalid or expired token. Please log in again.");
+            res.clearCookie("jwt");
+            return res.redirect("/account/login");
+        }
+
+        // Check if account type is 'Employee' or 'Admin'
+        const { account_type } = accountData;
+
+        if (account_type === "Employee" || account_type === "Admin") {
+            res.locals.accountData = accountData; // Pass account data to views
+            next(); // User is authorized
+        } else {
+            req.flash("notice", "You do not have permission to access this page.");
+            return res.redirect("/account/login");
+        }
+    });
+}
+
 
 /* ****************************************
  *  Check Login
  * ************************************ */
 Util.checkLogin = (req, res, next) => {
     if (res.locals.loggedin) {
-      next()
+        next()
     } else {
-      req.flash("notice", "Please log in.")
-      return res.redirect("/account/login")
+        req.flash("notice", "Please log in.")
+        return res.redirect("/account/login")
     }
-   }
+}
 
 
 

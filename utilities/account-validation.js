@@ -75,6 +75,54 @@ validate.checkRegData = async (req, res, next) => {
     next()
 }
 
+/* ******************************
+* Check account edit data and return errors or proceed to update
+* ***************************** */
+validate.checkUpdateUserData = async (req, res, next) => {
+    const { account_firstname, account_lastname, account_email } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        res.render("account/edit-info", {
+            errors,
+            title: "Edit Account Details",
+            nav,
+            account_firstname,
+            account_lastname,
+            account_email,
+        })
+        return
+    }
+    next()
+}
+
+/* ******************************
+* Check password update
+* ***************************** */
+validate.checkUpdatePassword = async (req, res, next) => {
+    const { account_firstname, account_lastname, account_email, account_password } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        res.render("account/edit-info", {
+            errors,
+            title: "Edit Account Details",
+            nav,
+            account_firstname,
+            account_lastname,
+            account_email,
+            account_password,
+        })
+        return
+    }
+    next()
+}
+
+
+
+
 
 
 /*  **********************************

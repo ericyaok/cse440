@@ -8,13 +8,20 @@
 
         <!-- Page Message block -->
         <%- messages() %>
-            <% if (errors) { %>
-                <ul class="notice">
-                    <% errors.array().forEach(error=> { %>
-                        <li>
-                            <%= error.msg %>
-                        </li>
-                        <% }) %>
-                </ul>
-                <% } %>
-                    <p>You are logged in</p>
+
+        <% if (errors) { %>
+            <ul class="notice">
+                <% errors.array().forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+        
+        <h2>Welcome <%- accountData.account_type %></h2>
+        <p>You are logged in</p>
+        <a href="/account/edit-info/<%= accountData.account_id %>">Edit Account Information</a>
+        
+        <% if (accountData.account_type === "Employee" || accountData.account_type === "Admin") { %>
+            <h3>Inventory Management</h3>
+            <a title="Click to manage inventory" href="/account/management">Manage Inventory</a>
+        <% } %>

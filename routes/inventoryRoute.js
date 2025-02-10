@@ -7,13 +7,13 @@ const inventoryValidate = require('../utilities/inventory-validation')
 const mnValidate = require('../utilities/management-validation')
 
 // Vehicle Management
-router.get("/", invController.buildManagement);
+//router.get("/", utilities.giveAdminRights, utilities.checkLogin, invController.buildManagement);
 
 // Add Classification
-router.get("/add-classification", invController.buildAddClassification);
+router.get("/add-classification",utilities.giveAdminRights, utilities.checkLogin, invController.buildAddClassification);
 
 // Add Inventory
-router.get("/add-inventory", invController.buildAddInventory);
+router.get("/add-inventory", utilities.giveAdminRights, utilities.checkLogin, invController.buildAddInventory);
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);
