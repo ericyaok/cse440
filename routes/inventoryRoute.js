@@ -30,6 +30,11 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 // Edit inventory route
 router.get("/edit/:inv_id", utilities.handleErrors(invController.buildEditView));
 
+// Route to build classification term update view
+router.get("/update-classification/:classification_id", utilities.giveAdminRights, utilities.checkLogin, invController.buildUpdateClassification)
+
+
+
 // Process classification addition
 router.post(
   "/add-classification",
@@ -51,6 +56,15 @@ router.post("/update/",
   inventoryValidate.inventoryRules(),
   inventoryValidate.checkUpdateData,
   utilities.handleErrors(invController.updateInventory)
+)
+
+
+// Process classification update
+router.post(
+  "/update-classification",
+  mnValidate.addClassificationRules(),
+  mnValidate.checkClassificationData,
+  utilities.handleErrors(invController.updateClassification)
 )
 
 

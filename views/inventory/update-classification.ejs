@@ -1,0 +1,34 @@
+<!-- Page Heading -->
+<% if (title) { %>
+    <h1>
+        <%= title %>
+    </h1>
+    <% } else { res.redirect('/') } %>
+
+
+        <!-- Page Message block -->
+        <%- messages() %>
+            <% if (errors) { %>
+                <ul class="notice">
+                    <% errors.array().forEach(error=> { %>
+                        <li>
+                            <%= error.msg %>
+                        </li>
+                        <% }) %>
+                </ul>
+                <% } %>
+
+
+                    <!-- Add Classification Form -->
+                    <div class="add-classification-container">
+                        <form action="/inv/update-classification" method="post">
+                            <label for="textInput">Edit term:</label>
+                            <input type="text" id="textInput" name="classification_name" pattern="[A-Za-z0-9]+"
+                                placeholder="Name cannot contain a space or special character of any kind." required
+                                value="<%= locals.classification_name %>">
+                            <input type="hidden" name="classification_id" <% if(locals.classification_id) { %> value="
+                            <%= locals.classification_id %>"
+                                <% } %>>
+                                    <button type="submit">Update Term</button>
+                        </form>
+                    </div>

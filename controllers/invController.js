@@ -118,6 +118,24 @@ invCont.buildAddInventory = async function (req, res, next) {
   })
 }
 
+/* ***************************
+ *  Build Classification Update View
+ * ************************** */
+invCont.buildUpdateClassification = async function (req, res, next) {
+  const classification_id = parseInt(req.params.classification_id)
+  const classification_item = await invModel.getClassificationById(classification_id)
+  console.log(classification_item)
+  let nav = await utilities.getNav()
+  res.render("./inventory/update-classification", {
+    title: 'Edit A Classification Term',
+    nav,
+    classification_name: classification_item.classification_name,
+    classification_id: classification_id,
+    errors: null,
+  })
+}
+
+
 
 /* ***************************
  *  Build Inventry Edit View
@@ -172,6 +190,40 @@ invCont.addClassification = async function (req, res, next) {
     res.status(501).render("inventory/management", {
       title: "Add New Classification",
       nav,
+    })
+  }
+}
+
+
+
+// Process Classification Update
+invCont.updateClassification = async function (req, res, next) {
+
+  const { classification_id, classification_name } = req.body
+  let nav = await utilities.getNav()
+  const classificationSelect = await utilities.buildClassificationList()
+
+  const addResult = await invModel.updateClassification(
+    classification_id,
+    classification_name
+  )
+
+  if (addResult) {
+    req.flash(
+      "notice",
+      `Congratulations, you have updated ${classification_name}.`
+    )
+    res.status(201).render("inventory/management", {
+      title: "Vehicle Management",
+      nav,
+      classificationSelect,
+    })
+  } else {
+    req.flash("notice", "Sorry, the update failed.")
+    res.status(501).render("inventory/management", {
+      title: "Vehicle Management",
+      nav,
+      classificationSelect,
     })
   }
 }
@@ -232,7 +284,7 @@ invCont.updateInventory = async function (req, res, next) {
     classification_id,
   } = req.body
   const updateResult = await invModel.updateInventory(
-    inv_id,  
+    inv_id,
     inv_make,
     inv_model,
     inv_description,
@@ -254,21 +306,21 @@ invCont.updateInventory = async function (req, res, next) {
     const itemName = `${inv_make} ${inv_model}`
     req.flash("notice", "Sorry, the insert failed.")
     res.status(501).render("inventory/edit-inventory", {
-    title: "Edit " + itemName,
-    nav,
-    classificationSelect: classificationSelect,
-    errors: null,
-    inv_id,
-    inv_make,
-    inv_model,
-    inv_year,
-    inv_description,
-    inv_image,
-    inv_thumbnail,
-    inv_price,
-    inv_miles,
-    inv_color,
-    classification_id
+      title: "Edit " + itemName,
+      nav,
+      classificationSelect: classificationSelect,
+      errors: null,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_year,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_color,
+      classification_id
     })
   }
 }
